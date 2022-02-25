@@ -1,54 +1,30 @@
-var directionsDisplay;
-var directionsService = new google.maps.DirectionsService();
-var map;
-var endMarker;
+// In the following example, markers appear when the user clicks on the map.
+// Each marker is labeled with a single alphabetical character.
+const labels = ["Incio", "Fin"];
+let labelIndex = 0;
 
-function initialize() {
-  directionsDisplay = new google.maps.DirectionsRenderer();
-  var paris = new google.maps.LatLng(48.86100157399595,2.335891842842086);
-  var mapOptions = {
-    zoom: 7,
-    center: paris
-  }
-  map = new google.maps.Map(document.getElementById("map"), mapOptions);
-  directionsDisplay.setMap(map);
+function initMap() {
+  const bangalore = { lat: 12.97, lng: 77.59 };
+  const map = new google.maps.Map(document.getElementById("map"), {
+    zoom: 12,
+    center: bangalore,
+  });
+
+  // This event listener calls addMarker() when the map is clicked.
+  google.maps.event.addListener(map, "click", (event) => {
+    addMarker(event.latLng, map);
+  });
+  // Add a marker at the center of the map.
+  addMarker(bangalore, map);
 }
 
-function dropPin() {
-  // if any previous marker exists, let's first remove it from the map
-  if (endMarker) {
-    endMarker.setMap(null);
-  }
-  // create the marker
-  endMarker = new google.maps.Marker({
-    position: map.getCenter(),
+// Adds a marker to the map.
+function addMarker(location, map) {
+  // Add the marker at the clicked location, and add the next-available label
+  // from the array of alphabetical characters.
+  new google.maps.Marker({
+    position: location,
+    label: labels[labelIndex++ % labels.length],
     map: map,
-    draggable: true,
-  });
-  copyMarkerpositionToInput();
-  // add an event "onDrag"
-  google.maps.event.addListener(endMarker, 'dragend', function() {
-    copyMarkerpositionToInput();
   });
 }
-
-function copyMarkerpositionToInput() {
-  // get the position of the marker, and set it as the value of input
-  document.getElementById("end").value = endMarker.getPosition().lat() +','+  endMarker.getPosition().lng();
-}
-
-function calcRoute() {
-  var start = document.getElementById("start").value;
-  var end = document.getElementById("end").value;
-  var request = {
-    origin:start,
-    destination:end,
-    travelMode: google.maps.TravelMode.DRIVING
-  };
-  directionsService.route(request, function(result, status) {
-    if (status == google.maps.DirectionsStatus.OK) {
-      directionsDisplay.setDirections(result);
-    }
-  });
-}
-google.maps.event.addDomListener(window, 'load', initialize);
