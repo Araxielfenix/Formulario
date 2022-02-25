@@ -2,6 +2,7 @@
 <html>
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <script src="https://maps.googleapis.com/maps/api/js"></script>
 </head>
 <body>
 
@@ -9,4 +10,14 @@
 <p>This example does not really do anything, other than showing you how to add the viewport meta element.</p>
 
 </body>
+  
+<fieldset>
+  <input id="start" readonly value="Paris"> 
+  <input id="end"> 
+  <input type="button" value="GO" onclick="calcRoute()">
+</fieldset>
+
+<input type="button" value="Drop Pin" onclick="dropPin()"> Drop a marker on the center of your map<br>
+
+<div id="map"></div>
 </html>
