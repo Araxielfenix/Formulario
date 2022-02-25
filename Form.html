@@ -10,19 +10,12 @@
 <h2>Setting the Viewport</h2>
 <p>This example does not really do anything, other than showing you how to add the viewport meta element.</p>
   
-<fieldset>
-  <input id="start" readonly value="Paris"> 
-  <input id="end"> 
-  <input type="button" value="GO" onclick="calcRoute()">
-</fieldset>
-
-<input type="button" value="Drop Pin" onclick="dropPin()"> Drop a marker on the center of your map<br>
-
 <div id="map"></div>
- <style>
-#map {
-  height: 400px;
-}
-</style>
+
+    <!-- Async script executes immediately and must be after any DOM elements used in callback. -->
+    <script
+      src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&callback=initMap&v=weekly"
+      async
+    ></script>
 </body>
 </html>
