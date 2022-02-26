@@ -11,5 +11,4 @@ function generarMapa(){
         zoom: 4
       })
     });
-    
 }
