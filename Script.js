@@ -13,4 +13,12 @@ function generarMapa(){
         zoom: 4
       })
     });
+    //Generar mapa centrado en la ubicación del usuario.
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(function(position) {
+        var pos = [position.coords.longitude, position.coords.latitude];
+        map.getView().setCenter(ol.proj.fromLonLat(pos));
+        map.getView().setZoom(12);
+      });
+    }
 }
