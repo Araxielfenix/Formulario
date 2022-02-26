@@ -1,4 +1,3 @@
-// Ejecutar el codigo al cargar la pagina.
 window.onload = generarMapa;
 
 function generarMapa(){
