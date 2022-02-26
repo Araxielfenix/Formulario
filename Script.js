@@ -1,3 +1,6 @@
+// Ejecutar el codigo al cargar la pagina.
+window.onload = generarMapa;
+
 function generarMapa(){
       var map = new ol.Map({
       target: 'map',
