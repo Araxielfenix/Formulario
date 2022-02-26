@@ -1,4 +1,4 @@
-window.onload = generarMapa;
+window.onload = generarMapa();
 
 function generarMapa(){
       var map = new ol.Map({
