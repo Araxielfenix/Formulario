@@ -1,7 +1,5 @@
-window.onload = generarMapa();
-
-function generarMapa(){
-      var map = new ol.Map({
+window.onload = function() {
+        var map = new ol.Map({
         target: 'map',
         layers: [
           new ol.layer.Tile({
