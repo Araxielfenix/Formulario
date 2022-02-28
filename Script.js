@@ -37,10 +37,10 @@ function showPosition(position) {
       var marker = L.marker([e.latlng.lat, e.latlng.lng], { draggable: true }).addTo(map);
       puntoDestino = marker.getLocation;
       marker.bindPopup("<b>Destino</b>").openPopup();
+      trazarRuta();
       contador++;
     }
   });
-  trazarRuta();
   getDireccion(e.latlng.lat, e.latlng.lng);
 }
 //Traza la ruta entre los puntos origen y destino.
