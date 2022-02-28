@@ -37,6 +37,7 @@ function showPosition(position) {
       marker.bindPopup("<b>Destino</b>").openPopup();
       contador++;
     }
+    getDireccion(e.latlng.lat, e.latlng.lng);
   });
 }
 //Traza la ruta entre los puntos origen y destino.
