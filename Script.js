@@ -1,11 +1,11 @@
-window.onload = function() {
-    getLocation();
+window.onload = function () {
+  getLocation();
 }
 
 function getLocation() {
   if (navigator.geolocation) {
     navigator.geolocation.getCurrentPosition(showPosition);
-  } else { 
+  } else {
     alert("Geolocation is not supported by this browser.");
   }
 }
@@ -18,57 +18,64 @@ function showPosition(position) {
     tileSize: 512,
     zoomOffset: -1,
     accessToken: 'pk.eyJ1IjoiYXJheGllbGZlbml4IiwiYSI6ImNqeHBudXRqdDBqcTAzY3F1dGNmZGcxd2UifQ.xh-aFGjDG3PMZU2WfdGaQA'
-}).addTo(map);
-//Enables dragging marker
-var contador = 0;
-var puntoOrigen;
-var puntoDestino;
-map.on('click', function(e) {
-   //Si el contador es 0, se crea un marcador con el nombre origen.
+  }).addTo(map);
+  var contador = 0;
+  var puntoOrigen;
+  var puntoDestino;
+  map.on('click', function (e) {
+    //Si el contador es 0, se crea un marcador con el nombre origen.
     if (contador == 0) {
-        var marker = L.marker([e.latlng.lat, e.latlng.lng], {draggable: true}).addTo(map);
-        puntoOrigen = marker.getLocation;
-        marker.bindPopup("<b>Origen</b>").openPopup();
-        contador++;
-        getDireccion(e.latlng.lat, e.latlng.lng);
+      // Si ya existe un marcador con el nombre origen, se elimina.
+      if (document.getElementById('origen') != null) {
+        map.removeLayer(origen);
+      }
+      var marker = L.marker([e.latlng.lat, e.latlng.lng], { draggable: true }).addTo(map);
+      puntoOrigen = marker.getLocation;
+      marker.bindPopup("<b>Origen</b>").openPopup();
+      contador++;
+      getDireccion(e.latlng.lat, e.latlng.lng);
     }
     //Si el contador es 1, se crea un marcador con el nombre destino.
     else if (contador == 1) {
-        var marker = L.marker([e.latlng.lat, e.latlng.lng], {draggable: true}).addTo(map);
-        puntoDestino = marker.getLocation;
-        marker.bindPopup("<b>Destino</b>").openPopup();
-        contador++;
-        getDireccion(e.latlng.lat, e.latlng.lng);
+      // Si ya existe un marcador con el nombre destino, se elimina.
+      if (document.getElementById('destino') != null) {
+        map.removeLayer(destino);
+      }
+      var marker = L.marker([e.latlng.lat, e.latlng.lng], { draggable: true }).addTo(map);
+      puntoDestino = marker.getLocation;
+      marker.bindPopup("<b>Destino</b>").openPopup();
+      contador = 0;
+      getDireccion(e.latlng.lat, e.latlng.lng);
     }
-});
-trazarRuta();
+  });
+  trazarRuta();
 }
 //Traza la ruta entre los puntos origen y destino.
 function trazarRuta() {
-    var url = 'https://api.mapbox.com/directions/v5/mapbox/driving/' + puntoOrigen + ';' + puntoDestino + '?geometries=geojson&access_token=pk.eyJ1IjoiYXJheGllbGZlbml4IiwiYSI6ImNqeHBudXRqdDBqcTAzY3F1dGNmZGcxd2UifQ.xh-aFGjDG3PMZU2WfdGaQA';
-    $.ajax({
-        url: url,
-        method: 'GET',
-        dataType: 'json',
-        success: function(data) {
-            var coords = data.routes[0].geometry.coordinates;
-            var line = L.polyline(coords).addTo(map);
-            map.fitBounds(line.getBounds());
-        }
-    });
+  var url = 'https://api.mapbox.com/directions/v5/mapbox/driving/' + puntoOrigen + ';' + puntoDestino + '?geometries=geojson&access_token=pk.eyJ1IjoiYXJheGllbGZlbml4IiwiYSI6ImNqeHBudXRqdDBqcTAzY3F1dGNmZGcxd2UifQ.xh-aFGjDG3PMZU2WfdGaQA';
+  $.ajax({
+    url: url,
+    method: 'GET',
+    dataType: 'json',
+    success: function (data) {
+      var coords = data.routes[0].geometry.coordinates;
+      var line = L.polyline(coords).addTo(map);
+      map.fitBounds(line.getBounds());
+    }
+  });
 }
 // Funcion para obtener la dirección de una latitud y longitud.
 function getDireccion(lat, lng) {
-    var url = 'https://api.mapbox.com/geocoding/v5/mapbox.places/' + lat + ',' + lng + '.json?access_token=pk.eyJ1IjoiYXJheGllbGZlbml4IiwiYSI6ImNqeHBudXRqdDBqcTAzY3F1dGNmZGcxd2UifQ.xh-aFGjDG3PMZU2WfdGaQA';
-    $.ajax({
-        url: url,
-        method: 'GET',
-        dataType: 'json',
-        success: function(data) {
-            var address = data.features[0].place_name;
-            var direccion = address.split(',');
-            var direccionFinal = direccion[0];
-            document.getElementById('direccion').innerHTML = direccionFinal;
-        }
-    });
+  var url = 'https://api.mapbox.com/geocoding/v5/mapbox.places/' + lat + ',' + lng + '.json?access_token=pk.eyJ1IjoiYXJheGllbGZlbml4IiwiYSI6ImNqeHBudXRqdDBqcTAzY3F1dGNmZGcxd2UifQ.xh-aFGjDG3PMZU2WfdGaQA';
+  $.ajax({
+    url: url,
+    method: 'GET',
+    dataType: 'json',
+    success: function (data) {
+      var address = data.features[0].place_name;
+      var direccion = address.split(',');
+      var direccionFinal = direccion[0];
+      document.getElementById('direccion').innerHTML = direccionFinal;
+    }
+  });
 }
