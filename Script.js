@@ -66,6 +66,7 @@ function getDireccion(lat, lng) {
       var direccion = address.split(',');
       var direccionFinal = direccion[0];
       document.getElementById('direccion').innerHTML = direccionFinal;
+      console.log(address);
     }
   });
 }
