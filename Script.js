@@ -30,7 +30,6 @@ function showPosition(position) {
       puntoOrigen = marker.getLocation;
       marker.bindPopup("<b>Origen</b>").openPopup();
       contador++;
-      getDireccion(e.latlng.lat, e.latlng.lng);
     }
     //Si el contador es 1, se crea un marcador con el nombre destino.
     else if (contador == 1) {
@@ -39,8 +38,8 @@ function showPosition(position) {
       puntoDestino = marker.getLocation;
       marker.bindPopup("<b>Destino</b>").openPopup();
       contador = 0;
-      getDireccion(e.latlng.lat, e.latlng.lng);
     }
+    getDireccion(e.latlng.lat, e.latlng.lng);
   });
   trazarRuta();
 }
