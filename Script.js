@@ -25,10 +25,7 @@ function showPosition(position) {
   map.on('click', function (e) {
     //Si el contador es 0, se crea un marcador con el nombre origen.
     if (contador == 0) {
-      // Si ya existe un marcador con el nombre origen, se elimina.
-      if (document.getElementById('origen') != null) {
-        map.removeLayer(origen);
-      }
+      map.removeLayer(origen);
       var marker = L.marker([e.latlng.lat, e.latlng.lng], { draggable: true }).addTo(map);
       puntoOrigen = marker.getLocation;
       marker.bindPopup("<b>Origen</b>").openPopup();
@@ -37,10 +34,7 @@ function showPosition(position) {
     }
     //Si el contador es 1, se crea un marcador con el nombre destino.
     else if (contador == 1) {
-      // Si ya existe un marcador con el nombre destino, se elimina.
-      if (document.getElementById('destino') != null) {
         map.removeLayer(destino);
-      }
       var marker = L.marker([e.latlng.lat, e.latlng.lng], { draggable: true }).addTo(map);
       puntoDestino = marker.getLocation;
       marker.bindPopup("<b>Destino</b>").openPopup();
