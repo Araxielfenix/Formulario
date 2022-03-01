@@ -6,6 +6,7 @@
   position: relative;
   margin: auto auto;
   text-align: center;
+  border-style: dashed;
 }
 input{
   width:30vw;
