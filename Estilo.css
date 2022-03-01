@@ -3,3 +3,12 @@
   width: 50%;
   height: 40rem; 
 }
+#Ruta{
+  position: relative;
+  margin: auto auto;
+  text-align: center;
+}
+input{
+  width:30vw;
+  text-align: center;
+}
