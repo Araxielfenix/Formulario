@@ -7,13 +7,14 @@
       integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
       crossorigin="" />
    <link rel="stylesheet" href="Estilo.css">
+   <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
    <script src="Script.js"></script>
-   <script src="https://unpkg.com/scrollreveal"></script>
+   <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 </head>
 
 <body>
-   <div id="map"></div>
-   <div class="Ruta">
+   <div id="map" data-aos="fade-up" data-aos-duration="1000"></div>
+   <div class="Ruta" data-aos="fade-up" data-aos-duration="1000">
       <div>
          <input type="text" id="Origen" placeholder="Origen">
       </div>
@@ -21,19 +22,19 @@
          <input type="text" id="Destino" placeholder="Destino">
       </div>
       <div>
-         <input type = "text" id = "cantidad" placeholder = "Numero de preguntas">
-         <button id = "agregar" value="Agregar" onclick="agregar()">Agregar</button>
+         <input type="text" id="cantidad" placeholder="Numero de preguntas">
+         <button id="agregar" value="Agregar" onclick="agregar()">Agregar</button>
       </div>
    </div>
    <div id="Formulario">
       <div id="preguntas">
-         <div id="p1">
+         <div id="p1" class="contenedorPreguntas" data-aos="fade-up" data-aos-duration="1000">
             <div id="Titulo">
-               <p id = "numPregunta"> Pregunta 1</p>
+               <p id="numPregunta"> Pregunta 1</p>
             </div>
             <div id="Descripcion">
             </div>
-            <select class = "cB" id="comboBox">
+            <select class="cB" id="comboBox">
                <option value="Opciones">Opciones</option>
                <option value="RespuestaCorta">Respuesta corta</option>
                <option value="RespuestaLarga">Respuesta larga</option>
@@ -45,5 +46,8 @@
 <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
    integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
    crossorigin=""></script>
+<script>
+   AOS.init();
+</script>
 
 </html>

@@ -1,7 +1,8 @@
 var latlngs = [];
-
+var contador = 0;
+var cantidad = 0;
 window.onload = function () {
-  ScrollReveal().reveal('div', { delay: 1000, interval: 200 });
+  
   getLocation();
 }
 
@@ -69,16 +70,29 @@ function showPosition(position) {
 
 // Función que se ejecuta al pulsar el botón de Agregar y clona el div p1 el numero de veces indicado en el campo de texto cantidad.
 function agregar() {
-  var cantidad = document.getElementById("cantidad").value;
-  for (var i = 1; i <= cantidad; i++) {
-    document.getElementById("numPregunta").innerHTML = "Pregunta " + (1 + ((i - cantidad) * -1));
-    var p1 = document.getElementById("p1");
-    var p2 = p1.cloneNode(true);
-    p2.id = "p1";
-    p2.style.display = "block";
-    p2.style.marginTop = "10px";
-    p2.style.marginBottom = "10px";
-    document.getElementById("p1").parentNode.insertBefore(p2, document.getElementById("p1").nextSibling);
+  if (contador == 0) {
+    var cantidad = document.getElementById("cantidad").value;
+    for (let i = 1; i <= cantidad; i++) {
+      document.getElementById("numPregunta").innerHTML = "Pregunta " + (1 + ((i - cantidad) * -1));
+      // Get the element
+      var elem = document.querySelector('.contenedorPreguntas');
+      var clone = elem.cloneNode(true);
+      clone.class = ".contenedorPreguntas2";
+      clone.style;
+      clone.classList.add('text-large');
+      // Inject it into the DOM
+      elem.after(clone);
+    }
+    contador = 1;
+    document.getElementById("p1").style = "display: none";
   }
-  document.getElementById("p1").style = "display: none";
+  else {
+    contador = 0;
+    var list = document.getElementsByClassName(".contenedorPreguntas2");
+    for (var i = list.length - 1; 0 <= i; i--){
+      if (list[i] && list[i].parentElement){
+        list[i].parentElement.removeChild(list[i]);
+      }
+    }
+  }
 }
