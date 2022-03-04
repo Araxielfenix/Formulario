@@ -13,18 +13,37 @@
 
 <body>
    <div id="map"></div>
-   <div class = "Ruta" >
+   <div class="Ruta">
       <div>
-         <p>Origen</p>
          <input type="text" id="Origen" placeholder="Origen">
       </div>
       <div>
-         <p>Destino</p>
          <input type="text" id="Destino" placeholder="Destino">
+      </div>
+      <div>
+         <input type = "text" id = "cantidad" placeholder = "Numero de preguntas">
+         <button id = "agregar" value="Agregar" onclick="agregar()">Agregar</button>
+      </div>
+   </div>
+   <div id="Formulario">
+      <div id="preguntas">
+         <div id="p1">
+            <div id="Titulo">
+               <p id = "numPregunta"> Pregunta 1</p>
+            </div>
+            <div id="Descripcion">
+            </div>
+            <select class = "cB" id="comboBox">
+               <option value="Opciones">Opciones</option>
+               <option value="RespuestaCorta">Respuesta corta</option>
+               <option value="RespuestaLarga">Respuesta larga</option>
+            </select>
+         </div>
       </div>
    </div>
 </body>
 <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
    integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
    crossorigin=""></script>
+
 </html>

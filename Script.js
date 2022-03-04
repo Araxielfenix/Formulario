@@ -1,7 +1,7 @@
 var latlngs = [];
 
 window.onload = function () {
-  ScrollReveal().reveal('div', { delay: 1000 , interval: 200, reset: true });
+  ScrollReveal().reveal('div', { delay: 1000, interval: 200 });
   getLocation();
 }
 
@@ -67,28 +67,18 @@ function showPosition(position) {
   });
 }
 
-L.polyline.on('drag', function(e){
-  var url = 'https://api.mapbox.com/geocoding/v5/mapbox.places/' + e.latlng.lng + ',' + e.latlng.lat + '.json?access_token=pk.eyJ1IjoiYXJheGllbGZlbml4IiwiYSI6ImNqeHBudXRqdDBqcTAzY3F1dGNmZGcxd2UifQ.xh-aFGjDG3PMZU2WfdGaQA';
-  latlngs.push([e.latlng.lat, e.latlng.lng]);  
-  var xhr = new XMLHttpRequest();
-    xhr.open('GET', url, true);
-    xhr.onload = function () {
-      if (this.status == 200) {
-        var data = JSON.parse(this.response);
-        var direccion = data.features[0].place_name;
-        var polyline = L.polyline(latlngs, { color: 'red' }).addTo(map);
-      }
-    };
-    xhr.send();
-  //latlngs.push([e.latlng.lat, e.latlng.lng]);
-  // Si bindpopup contiene la cadena "Origen", se escribe en el textbox de Origen.
-  if (marker.bindPopup.includes("Origen")) {
-    document.getElementById("Origen").value = direccion;
-    puntoDestino.bindPopup("<b>Origen: </b>" + direccion).openPopup();
+// Función que se ejecuta al pulsar el botón de Agregar y clona el div p1 el numero de veces indicado en el campo de texto cantidad.
+function agregar() {
+  var cantidad = document.getElementById("cantidad").value;
+  for (var i = 1; i <= cantidad; i++) {
+    document.getElementById("numPregunta").innerHTML = "Pregunta " + (1 + ((i - cantidad) * -1));
+    var p1 = document.getElementById("p1");
+    var p2 = p1.cloneNode(true);
+    p2.id = "p1";
+    p2.style.display = "block";
+    p2.style.marginTop = "10px";
+    p2.style.marginBottom = "10px";
+    document.getElementById("p1").parentNode.insertBefore(p2, document.getElementById("p1").nextSibling);
   }
-  // Si bindpopup contiene la cadena "Destino", se escribe en el textbox de Destino.
-  if (marker.bindPopup.includes("Destino")) {
-    document.getElementById("Destino").value = direccion;
-    puntoDestino.bindPopup("<b>Destino: </b>" + direccion).openPopup();
-  }
-});
+  document.getElementById("p1").style = "display: none";
+}
