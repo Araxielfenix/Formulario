@@ -29,6 +29,10 @@ input#cantidad{
 button#agregar{
   margin: auto -2.7%;
 }
+button#eliminar {
+  vertical-align: -webkit-baseline-middle;
+  margin: auto 2rem;
+}
 #p1{
   position: relative;
   margin: 1rem auto;
@@ -38,7 +42,7 @@ button#agregar{
   height: 10rem;
   width: 35rem;
 }
-.contenedorPreguntas2{
+.contenedorPreguntas{
   position: relative;
   margin: 1rem auto;
   text-align: center;
@@ -56,8 +60,37 @@ select#comboBox.cB{
   border-style: hidden;
   border-radius: 15%;
 }
-#Titulo{
+select#comboBox.cB{
+  margin: auto auto;
+  background-color: rgb(171, 208, 238);
+  border-style: hidden;
+  border-radius: 15%;
+}
+p#numPregunta{
   overflow: scroll;
   overflow-y: hidden; 
   overflow-x: hidden; 
+}
+img.eliminar{
+  margin: 0.5rem;
+  width: 30px;
+}
+.wrapper {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-gap: 10px;
+  grid-auto-rows: minmax(100px, auto);
+}
+.cero{
+  grid-column: 1;
+    grid-row: 1;
+    width: 5rem;
+}
+.one{
+  grid-column: 1;
+  grid-row: 1;
+}
+.two{
+  grid-column: 2;
+  grid-row: 1;
 }

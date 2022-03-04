@@ -77,6 +77,7 @@ function agregar() {
       // Get the element
       var elem = document.querySelector('.contenedorPreguntas');
       var clone = elem.cloneNode(true);
+      clone.id = "p" + (1 + ((i - cantidad) * -1));
       clone.class = ".contenedorPreguntas2";
       clone.style;
       clone.classList.add('text-large');
@@ -86,13 +87,13 @@ function agregar() {
     contador = 1;
     document.getElementById("p1").style = "display: none";
   }
-  else {
-    contador = 0;
-    var list = document.getElementsByClassName(".contenedorPreguntas2");
-    for (var i = list.length - 1; 0 <= i; i--){
-      if (list[i] && list[i].parentElement){
-        list[i].parentElement.removeChild(list[i]);
-      }
+}
+// Funcion que se ejecuta al pulsar el botón de Eliminar y elimina el div p1.
+function eliminar() {
+  if (contador == 1) {
+    for (let i = 1; i <= cantidad; i++) {
+      document.getElementById("p" + (1 + ((i - cantidad) * -1))).remove();
     }
+    contador = 0;
   }
 }

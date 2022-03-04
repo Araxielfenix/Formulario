@@ -24,13 +24,20 @@
       <div>
          <input type="text" id="cantidad" placeholder="Numero de preguntas">
          <button id="agregar" value="Agregar" onclick="agregar()">Agregar</button>
+         <button id = "eliminar" value = "Eliminar" onclick="eliminar()">Eliminar</button>
       </div>
    </div>
    <div id="Formulario">
       <div id="preguntas">
          <div id="p1" class="contenedorPreguntas" data-aos="fade-up" data-aos-duration="1000">
-            <div id="Titulo">
-               <p id="numPregunta"> Pregunta 1</p>
+            <div id="Titulo" class = "wrapper ">
+               <div class = "cero"></div>
+               <div class = "one">
+                  <p id="numPregunta"> Pregunta 1</p>
+               </div>
+               <div class = "two">
+                  <img class = "eliminar" src="https://img.icons8.com/carbon-copy/50/000000/filled-trash.png"/>
+               </div>
             </div>
             <div id="Descripcion">
             </div>
