@@ -1,12 +1,15 @@
 var latlngs = [];
+
 window.onload = function () {
+  ScrollReveal().reveal('div', { delay: 1000 , interval: 200, reset: true });
   getLocation();
 }
+
 function getLocation() {
   if (navigator.geolocation) {
     navigator.geolocation.getCurrentPosition(showPosition);
   } else {
-    alert("Geolocation is not supported by this browser.");
+    alert("Tu navegador no soporta la geolicalización.");
   }
 }
 
@@ -62,12 +65,30 @@ function showPosition(position) {
       xhr.send();
     }
   });
-  
 }
 
-
-
-// Vuelve a dibujar la linea entre los dos puntos cuando se mueve un marcador.
-function moveMarker(e) {
-  var polyline = L.polyline(latlngs, { color: 'red' }).addTo(map);
-}
+L.polyline.on('drag', function(e){
+  var url = 'https://api.mapbox.com/geocoding/v5/mapbox.places/' + e.latlng.lng + ',' + e.latlng.lat + '.json?access_token=pk.eyJ1IjoiYXJheGllbGZlbml4IiwiYSI6ImNqeHBudXRqdDBqcTAzY3F1dGNmZGcxd2UifQ.xh-aFGjDG3PMZU2WfdGaQA';
+  latlngs.push([e.latlng.lat, e.latlng.lng]);  
+  var xhr = new XMLHttpRequest();
+    xhr.open('GET', url, true);
+    xhr.onload = function () {
+      if (this.status == 200) {
+        var data = JSON.parse(this.response);
+        var direccion = data.features[0].place_name;
+        var polyline = L.polyline(latlngs, { color: 'red' }).addTo(map);
+      }
+    };
+    xhr.send();
+  //latlngs.push([e.latlng.lat, e.latlng.lng]);
+  // Si bindpopup contiene la cadena "Origen", se escribe en el textbox de Origen.
+  if (marker.bindPopup.includes("Origen")) {
+    document.getElementById("Origen").value = direccion;
+    puntoDestino.bindPopup("<b>Origen: </b>" + direccion).openPopup();
+  }
+  // Si bindpopup contiene la cadena "Destino", se escribe en el textbox de Destino.
+  if (marker.bindPopup.includes("Destino")) {
+    document.getElementById("Destino").value = direccion;
+    puntoDestino.bindPopup("<b>Destino: </b>" + direccion).openPopup();
+  }
+});

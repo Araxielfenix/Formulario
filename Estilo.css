@@ -2,11 +2,13 @@
   margin: auto auto;
   height: 32rem; 
   border-style: dashed;
+  visibility: hidden;
 }
-#Ruta{
+.Ruta{
   position: relative;
   margin: auto auto;
   text-align: center;
+  visibility: hidden;
 }
 input{
   width:30vw;
